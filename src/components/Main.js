@@ -5,13 +5,22 @@ import Information from "./InformationComponent/InformationComponent"
 
 const Main = () => {
 
+    const [check, setCheck] = useState(true)
+
+
+    //Confirm Names
+    const namesHandler = () => {
+        setCheck(false)
+    }
+
 
     return (
         <div>
 
-            <div>
-                <CreateComponent />
-            </div>
+            {check ? <Information onClick={namesHandler} /> :
+                <div>
+                    <CreateComponent />
+                </div>}
 
 
         </div>
