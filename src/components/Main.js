@@ -20,11 +20,20 @@ const Main = () => {
     const fname = JSON.parse(localStorage.getItem('names')).fname
     const lname = JSON.parse(localStorage.getItem('names')).lname
 
+    const dispatch = useDispatch()
+
 
     //Confirm Names
     const namesHandler = () => {
         setCheck(false)
     }
+
+
+    // Delete Card
+    const deleteHandler = useCallback((id) => {
+        dispatch(listActions.deleteList(id))
+    }, [dispatch])
+
 
 
     return (
@@ -53,7 +62,8 @@ const Main = () => {
                                             key={value.id}
                                             id={value.id}
                                             title={value.title}
-                                            content={value.content}        
+                                            content={value.content}
+                                            onDelete={deleteHandler}
                                             titleValue={value.title}
                                             contentValue={value.content}
                                         />

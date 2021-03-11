@@ -1,4 +1,4 @@
-import React, {useCallback} from "react"
+import React, { useCallback } from "react"
 import {
     Card, CardBody, Button, Form, FormGroup, Input
 } from 'reactstrap';
@@ -11,13 +11,20 @@ const CardComponent = (props) => {
 
     const dispatch = useDispatch()
 
+    //Delete Card
+    function handleClick(e) {
+        props.onDelete(props.id);
+        e.preventDefault()
+    }
+
+
     return (
         <div >
             <Card>
                 <Form>
                     <CardBody>
                         <div className="deleteContainer">
-                            <Button color="danger">X</Button>
+                            <Button color="danger" onClick={handleClick}>X</Button>
                         </div>
                         <FormGroup>
                             <div>

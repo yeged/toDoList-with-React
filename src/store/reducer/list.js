@@ -22,6 +22,11 @@ const listReducer = (state = initialState, actions) => {
                 ...state,
                 list: state.list.concat(newList)
             }
+        case DELETE_LIST:
+            return {
+                ...state,
+                list: state.list.filter(list => list.id !== actions.id)
+            }
 
         default:
             return state;

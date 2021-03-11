@@ -14,3 +14,12 @@ export const createList = (id) => {
         })
     }
 }
+
+export const deleteList = (id) => {
+    return async (dispatch) => {
+        dispatch({
+            type: DELETE_LIST,
+            id: id
+        })
+    }
+}
