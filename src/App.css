@@ -23,3 +23,33 @@
   margin: 32px;
   padding: 16px 0;
 }
+
+.deleteContainer{
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(50%,-50%);
+  z-index: 100;
+}
+
+.titleInput {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 0px;
+  text-align: center;
+  background-color: transparent;
+  font-size: 2.5rem;
+  width: 100%;
+  color: crimson;
+  font-weight: 500;
+}
+
+.contentInput{
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #428BCA;
+  text-align: center;
+  background-color: transparent;
+}

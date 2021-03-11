@@ -5,12 +5,17 @@ import Information from "./InformationComponent/InformationComponent"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { library } from "@fortawesome/fontawesome-svg-core"
+import { useSelector, useDispatch } from "react-redux"
+import * as listActions from "../store/actions/list"
 
 library.add(faUser)
 
 const Main = () => {
 
     const [check, setCheck] = useState(true)
+
+
+    const lists = useSelector(state => state.list.list)
 
     const fname = JSON.parse(localStorage.getItem('names')).fname
     const lname = JSON.parse(localStorage.getItem('names')).lname
@@ -41,7 +46,20 @@ const Main = () => {
                     </div>
                     <div className="col col-md-9">
                         <div className="row">
- 
+                            {lists.map((value) => {
+                                return (
+                                    <div className="col col-md-4">
+                                        <CardComponent
+                                            key={value.id}
+                                            id={value.id}
+                                            title={value.title}
+                                            content={value.content}        
+                                            titleValue={value.title}
+                                            contentValue={value.content}
+                                        />
+                                    </div>
+                                )
+                            })}
                             <div className="col col-md-4">
                                 <CreateComponent />
                             </div>
