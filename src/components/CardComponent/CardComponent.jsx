@@ -17,6 +17,12 @@ const CardComponent = (props) => {
         e.preventDefault()
     }
 
+    //Add Title
+    const onTitleChange = (e) => {
+        props.onTitleChange(e, props.id)
+        e.preventDefault()
+    }
+
 
     return (
         <div >
@@ -32,6 +38,7 @@ const CardComponent = (props) => {
                                     className="titleInput"
                                     name="title"
                                     value={props.titleValue}
+                                    onChange={onTitleChange}
                                     placeholder="Title"
                                     maxLength="15"
                                 />

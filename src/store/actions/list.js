@@ -23,3 +23,13 @@ export const deleteList = (id) => {
         })
     }
 }
+
+export const addTitle = (id, title) => {
+    return async (dispatch) => {
+        dispatch({
+            type:ADD_TITLE,
+            id: id,
+            title: title
+        })
+    }
+}

@@ -35,6 +35,11 @@ const Main = () => {
     }, [dispatch])
 
 
+    // Add Title
+    const onTitleChange = useCallback((e, id) => {
+        dispatch(listActions.addTitle(id, e.target.value))
+    }, [dispatch])
+
 
     return (
         <div>
@@ -65,6 +70,7 @@ const Main = () => {
                                             content={value.content}
                                             onDelete={deleteHandler}
                                             titleValue={value.title}
+                                            onTitleChange={onTitleChange}
                                             contentValue={value.content}
                                         />
                                     </div>

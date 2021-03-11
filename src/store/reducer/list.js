@@ -27,6 +27,22 @@ const listReducer = (state = initialState, actions) => {
                 ...state,
                 list: state.list.filter(list => list.id !== actions.id)
             }
+        case ADD_TITLE:
+            const listIndex = state.list.findIndex(list => list.id === actions.id)
+
+            const addList = new List(
+                actions.id,
+                actions.title,
+                state.list[listIndex].content,
+
+            )
+
+            const addedTitle = [...state.list]
+            addedTitle[listIndex] = addList
+            return {
+                ...state,
+                list: addedTitle,
+            }
 
         default:
             return state;
