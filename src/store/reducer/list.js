@@ -2,8 +2,6 @@ import List from "../../models/List"
 import Item from "../../models/Item"
 import { CREATE_LIST, DELETE_LIST, ADD_ITEM, ADD_TITLE, APPLY_ITEM, DELETE_ITEM } from "../actions/list"
 
-
-
 const initialState = {
     list: [],
     items: []
@@ -43,7 +41,51 @@ const listReducer = (state = initialState, actions) => {
                 ...state,
                 list: addedTitle,
             }
+        case ADD_ITEM:
+            const listItemIndex = state.list.findIndex(list => list.id === actions.id)
 
+            const addItemList = new List(
+                actions.id,
+                state.list[listItemIndex].title,
+                actions.content,
+
+            )
+
+            const addedItem = [...state.list]
+            addedItem[listItemIndex] = addItemList
+            return {
+                ...state,
+                list: addedItem,
+            }
+        case APPLY_ITEM:
+            const applyItem = new Item(
+                actions.id,
+                actions.content,
+                actions.contentId
+            )
+
+            const contentIndex = state.list.findIndex(list => list.id === actions.id)
+
+            const contentEmpty = new List(
+                actions.id,
+                state.list[contentIndex].title,
+                "",
+
+            )
+
+            const contents = [...state.list]
+            contents[contentIndex] = contentEmpty
+            
+            return {
+                ...state,
+                list: contents,
+                items: state.items.concat(applyItem)
+            }
+        case DELETE_ITEM:
+            return {
+                ...state,
+                items: state.items.filter(item => item.contentId !== actions.contentId)
+            }
         default:
             return state;
     }

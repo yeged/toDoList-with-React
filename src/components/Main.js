@@ -8,11 +8,13 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { useSelector, useDispatch } from "react-redux"
 import * as listActions from "../store/actions/list"
 
+
 library.add(faUser)
 
 const Main = () => {
 
     const [check, setCheck] = useState(true)
+    const [content, setContent] = useState("")
 
 
     const lists = useSelector(state => state.list.list)
@@ -21,13 +23,6 @@ const Main = () => {
     const lname = JSON.parse(localStorage.getItem('names')).lname
 
     const dispatch = useDispatch()
-
-
-    //Confirm Names
-    const namesHandler = () => {
-        setCheck(false)
-    }
-
 
     // Delete Card
     const deleteHandler = useCallback((id) => {
@@ -41,6 +36,22 @@ const Main = () => {
     }, [dispatch])
 
 
+    //Add Item
+    const onItemChange = useCallback((e, id) => {
+        dispatch(listActions.addItem(id, e.target.value))
+        setContent(e.target.value)
+    })
+
+    const addItem = useCallback((id) => {
+        dispatch(listActions.applyItem(id, content, Math.random()))
+        setContent("")
+    })
+
+    //Confirm Names
+    const namesHandler = () => {
+        setCheck(false)
+    }
+
     return (
         <div>
             {check ? <Information onClick={namesHandler} /> : <div className="container">
@@ -48,8 +59,8 @@ const Main = () => {
                     <div className="col col-md-3">
                         <div className="row-content">
                             <div className="row">
-                                <div className="col col-md col-lg-8" style={{ border: "1px solid black", height: "150px", borderRadius: "60%", backgroundColor: "lightgrey", overflow: "hidden" }}>
-                                    <FontAwesomeIcon style={{ margin: "20px 0px" }} icon="user" size="8x" />
+                                <div className="col col-md col-lg-8" style={{border: "1px solid black", height: "150px", borderRadius: "60%", backgroundColor: "lightgrey", overflow: "hidden"}}>
+                                    <FontAwesomeIcon style={{margin: "20px 0px"}} icon="user" size="8x" />
                                 </div>
                                 <div className="col col-md col-lg-4">
                                     <h4>{fname + " " + lname}</h4>
@@ -72,6 +83,8 @@ const Main = () => {
                                             titleValue={value.title}
                                             onTitleChange={onTitleChange}
                                             contentValue={value.content}
+                                            onItemChange={onItemChange}
+                                            addItem={addItem}
                                         />
                                     </div>
                                 )
@@ -84,6 +97,7 @@ const Main = () => {
                 </div>
             </div>}
         </div>
+
     )
 }
 
